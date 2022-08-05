@@ -1,5 +1,5 @@
 # AWS infrastrucure provisioning with Terraform
-This challenge will create a VCP with Internet Gateway, private and public subnets two each accross 2 Avialability zones in AWS  using
+This  Terraform code will create a VCP with Internet Gateway, private and public subnets two each accross 2 Avialability zones in AWS  using
 and terraform and also deploy the following resources:
 
 - A bastion/jumpbox host into the public subnet in Avialability Zone a and a second instance called node in the private subnet in Availability Zone b, 
@@ -7,24 +7,21 @@ and terraform and also deploy the following resources:
 
 - An SSH key pair which will be dynamically generated as well and the private key copied over to the bastion/jumpbox host.
 
-- Two security groups, one allowing access via port 22 eternally and the other allowing traffic via port 22 only from the public subnets.
+- Two security groups, one allowing access via port 22 eternally and the other allowing traffic via port 22 only from within the VPC subnets.
   The The bastion/jumbox host  in the public subnet is assigned to the security group with external or internet access via port 22 for ssh and the node instance in the private 
   subnet is assigned to the security group that only allows ssh access from the VPC public subnet hosting the bastion/jumpbox host. 
-  
-  Note that you can also tie the public access connection to a secure IP or VPN and both security groups are dynamically created in the network module.
 
 
 ## Modules
-For simplicity purposes I've broken down this deployment into three main modules and did also used well structured modules from Terraform AWS to facilitate
-the creation of some of the resources needed for this challenge. The modules used are describe below:
+For simplicity purposes I've broken down this deployment into three separate modules describe below:
 
 - ## ssh-key: 
-  Which generates an ssh key pair use to access the instances
+  Generates an ssh key pair to be use to access the instances created by ec2 module
 
 - ## network: 
-  Creates a VPC with IGWs, NAT GWs, 2 public and 2 private subnets each in a different Availability Zone, Security Groups to SSH to bastion/jumpbox host from the internet and within the VPC.
+  Creates a VPC with IGWs, NAT GWs,RT, 2 public and 2 private subnets each in a different Availability Zone, Security Groups to SSH to bastion/jumpbox host from the internet and within the VPC.
   
-  **NB in this module I referenced terraform-AWS VPC moudle from Terraform registry to facility the creations of RT and other netwok configs** 
+  **NB in this module I've referenced terraform-AWS VPC moudle from Terraform registry to facility the creations of RT and other netwok configs** 
 
 - ## ec2: 
   This module creates two Amazon Linux2 t2.micro instances, one called jumbox in the public subnet and the other called node in private subnet
@@ -62,11 +59,11 @@ Please not hat these inputs variables are located in **variables.tf** found in t
 
 ## Accessing node/instance in private network via SSH
 
-Once terraform is done provisioning the above infrastrucure it will output two paramters:
-- The first is the ssh connection string to access the jumpbox from the internet as shown in **public\_connection\_string** from Outputs above.
+A ssh keypair will be created at the root directory of this project and once terraform is done provisioning the above infrastrucure it will output two paramters:
+- SSH connection string to access the jumpbox from the internet as shown in **public\_connection\_string** from Outputs above.
 - SSH connection string to access the node (Instance in private subnet) from jumbox within the VPC as shown in **private\_connection\_string** from Outputs Section above
 
-Since the node instance is in a private subnet with a private IP not accessible from the internet you must ssh into the jumpbox first before  connecting to the latter
+Since the node instance is in a private subnet with a private IP not accessible from the internet you must first SSH into the jumpbox via port 22 using the ssh keypair in the project's home directory  connecting to the node instance via ssh on port 22.
 
 Note that during provisioning the private ssh key is copied to the jumpbox precisely in the ec2-user home directory. From this location you can access the node instance
 using the ssh private connection string from Terraform's Outputs. Once in the node instance located in the private subnet and with the help of the NAT Gateway
