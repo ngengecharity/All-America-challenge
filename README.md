@@ -41,10 +41,10 @@ You will also need an AWS Access and Secret keys with Admin privileges for progr
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| namespace | The project namespace to use for unique resource naming | `string` | `"allamerica-challenge"` | no |
-| region | AWS region | `string` | `"us-east-1"` | no |
-| acces_key | AWS Access Key | `string` | `"enter your aws access key here"` | yes |
-| secret_key | AWS Secret Key | `string` | `"enter your aws secret key here"` | yes |
+|** namespace** | The project namespace to use for unique resource naming | `string` | `"allamerica-challenge"` | **no** |
+| **region** | AWS region | `string` | `"us-east-1"` | **no** |
+| **acces_key** | AWS Access Key | `string` | `"enter your aws access key here"` | **yes** |
+| **secret_key** | AWS Secret Key | `string` | `"enter your aws secret key here"` | **yes** |
 
 Please not that these inputs are located in **variables.tf** found in the root directory of this project
 
@@ -53,8 +53,8 @@ Please not that these inputs are located in **variables.tf** found in the root d
 
 | Name | Description |
 |------|-------------|
-| public\_connection\_string | SSH connection strings to access jumpbox |
-| private\_connection\_string | SSH connection string to access private instance also called node |
+| **public\_connection\_string** | SSH connection strings to access jumpbox |
+| **private\_connection\_string** | SSH connection string to access private instance also called node |
 
 
 ## Accessing node/instance in private network via SSH
