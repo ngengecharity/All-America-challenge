@@ -34,7 +34,7 @@ For simplicity purposes I've broken down this deployment into three separate mod
 The provider used in this case is AWS with more detail found in **provider.tf** located in  the project's root
 
 ## Requirements.
-For this to work you will need to install terraform 1.2.6 (currently latest). I you do not have Terraform installed please go to https://www.terraform.io/downloads for more assistance.
+A part of the requirement yo will need to install terraform **1.2.6 (currently latest)**. If you do not have Terraform installed please go to https://www.terraform.io/downloads for help to do so.
 You will also need an AWS Access and Secret keys with Admin privileges for programatic access
 
 ## Inputs
@@ -46,7 +46,7 @@ You will also need an AWS Access and Secret keys with Admin privileges for progr
 | acces_key | AWS Access Key | `string` | `"enter your aws access key here"` | yes |
 | secret_key | AWS Secret Key | `string` | `"enter your aws secret key here"` | yes |
 
-Please not hat these inputs variables are located in **variables.tf** found in the root directory of this project
+Please not that these inputs are located in **variables.tf** found in the root directory of this project
 
 
 ## Outputs
