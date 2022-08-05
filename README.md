@@ -41,7 +41,7 @@ You will also need an AWS Access and Secret keys with Admin privileges for progr
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-|** namespace** | The project namespace to use for unique resource naming | `string` | `"allamerica-challenge"` | **no** |
+|**namespace** | The project namespace to use for unique resource naming | `string` | `"allamerica-challenge"` | **no** |
 | **region** | AWS region | `string` | `"us-east-1"` | **no** |
 | **acces_key** | AWS Access Key | `string` | `"enter your aws access key here"` | **yes** |
 | **secret_key** | AWS Secret Key | `string` | `"enter your aws secret key here"` | **yes** |
