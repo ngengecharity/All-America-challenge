@@ -11,7 +11,7 @@ and terraform and also deploy the following resources:
   The The bastion/jumbox host  in the public subnet is assigned to the security group with external or internet access via port 22 for ssh and the node instance in the private 
   subnet is assigned to the security group that only allows ssh access from the VPC public subnet hosting the bastion/jumpbox host. 
   
-  ## Note that you can also tie the public access connection to a secure IP or VPN and both security groups are dynamically created in the network module.
+  Note that you can also tie the public access connection to a secure IP or VPN and both security groups are dynamically created in the network module.
 
 
 # Modules
@@ -38,6 +38,7 @@ The provider used in this case is aws with more detail found in provider.tf loca
 
 # Requirements.
 For this to work you will need to install terraform 1.2.6 (currently latest). I you do not have Terraform installed please go to https://www.terraform.io/downloads for more assistance.
+You will also need an AWS Access and Secret keys with Admin privileges for programatic access
 
 ## Inputs
 
@@ -45,11 +46,15 @@ For this to work you will need to install terraform 1.2.6 (currently latest). I 
 |------|-------------|------|---------|:--------:|
 | namespace | The project namespace to use for unique resource naming | `string` | `"allamerica-challenge"` | no |
 | region | AWS region | `string` | `"us-east-1"` | no |
+| acces_key | AWS Access Key | `string` | `"enter your aws private key here"` | yes |
+| secret_key | AWS Secret Key | `string` | `"enter your aws private key here"` | yes |
+
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| private\_connection\_string | Copy/Paste/Enter - You are in the private ec2 instance |
-| public\_connection\_string | Copy/Paste/Enter - You are in the matrix |
+| public\_connection\_string | SSH connection strings to access jumpbox |
+| private\_connection\_string | SSH connection string to access private instance also called node |
+
 

@@ -12,12 +12,12 @@ variable "region" {
 
 variable "access_key" {
   description = "AWS Access Key"
-  default     = "your ssh private key"
+  default     = "your aws private key"
   type        = string
 }
 
 variable "secret_key" {
   description = "AWS Secret Key"
-  default     = "your ssh secret key"
+  default     = "your aws secret key"
   type        = string
 }
