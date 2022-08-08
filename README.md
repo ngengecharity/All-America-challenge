@@ -34,7 +34,7 @@ For simplicity purposes I've broken down this deployment into three separate mod
 The provider used in this case is AWS with more detail found in **provider.tf** located in  the project's root
 
 ## Requirements.
-A part of the requirement yo will need to install terraform **1.2.6 (currently latest)**. If you do not have Terraform installed please go to https://www.terraform.io/downloads for help to do so.
+A part of the requirement you will need to install terraform **1.2.6 (currently latest)**. If you do not have Terraform installed please go to https://www.terraform.io/downloads for help to do so.
 You will also need an AWS Access and Secret keys with Admin privileges for programatic access
 
 ## Inputs
@@ -59,7 +59,7 @@ Please not that these inputs are located in **variables.tf** found in the root d
 
 ## Accessing node/instance in private network via SSH
 
-A ssh keypair will be created at the root directory of this project and once terraform is done provisioning the above infrastrucure it will output two paramters:
+An ssh keypair will be created at the root directory of this project and once terraform is done provisioning the above infrastrucure it will output two paramters:
 - SSH connection string to access the jumpbox from the internet as shown in **public\_connection\_string** from Outputs above.
 - SSH connection string to access the node (Instance in private subnet) from jumbox within the VPC as shown in **private\_connection\_string** from Outputs Section above
 
