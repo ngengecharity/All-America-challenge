@@ -28,7 +28,7 @@ resource "aws_security_group" "allow_ssh_pub" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["73.215.142.52/32"]
   }
 
   egress {
@@ -59,10 +59,10 @@ resource "aws_security_group" "web_sg" {
 
   ingress {
     description = "ssh from jumpbox"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.5.0/24"]
+    cidr_blocks = ["73.215.142.52/32"]
   }
 
 
@@ -96,7 +96,7 @@ resource "aws_security_group" "db_access" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.5.0/24"]
+    cidr_blocks = ["73.215.142.52/32"]
   }
 
   egress {
