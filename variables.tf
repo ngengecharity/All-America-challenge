@@ -1,6 +1,6 @@
 variable "namespace" {
   description = "The project namespace to use for unique resource naming"
-  default     = "allamerica-challenge"
+  default     = "charity-terraform-project"
   type        = string
 }
 
@@ -12,12 +12,12 @@ variable "region" {
 
 variable "access_key" {
   description = "AWS Access Key"
-  default     = "enter your aws access key"
+  default     = "AKIAQ4MYQM5VYEUQRVNB"
   type        = string
 }
 
 variable "secret_key" {
   description = "AWS Secret Key"
-  default     = "enter your aws secret key"
+  default     = "LvmggxoBOZpl5iMn4sI5xR5qWnZ1ar7vb2v73eaT"
   type        = string
 }
