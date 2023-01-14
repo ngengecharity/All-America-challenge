@@ -93,7 +93,7 @@ resource "aws_instance" "db_server" {
   associate_public_ip_address = false
   instance_type               = var.instance_type
   key_name                    = var.key_name
-  subnet_id                   = var.vpc.private_subnets[0]
+  subnet_id                   = var.vpc.database_subnets[0]
   vpc_security_group_ids      = [var.sg_db_access_id]
   tags = {
     "Name" = "${var.namespace}-db_server"
