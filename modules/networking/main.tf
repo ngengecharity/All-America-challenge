@@ -62,7 +62,7 @@ resource "aws_security_group" "web_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["73.215.142.52/32"]
+    cidr_blocks = ["192.168.5.0/24"]
   }
 
 
@@ -96,7 +96,7 @@ resource "aws_security_group" "db_access" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["73.215.142.52/32"]
+    cidr_blocks = ["192.168.5.0/24"]
   }
 
   egress {
