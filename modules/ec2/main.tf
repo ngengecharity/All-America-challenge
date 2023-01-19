@@ -17,7 +17,7 @@ resource "aws_instance" "jumpbox" {
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = var.key_name
-  subnet_id                   = var.vpc.public_subnets[0]
+  subnet_id                   = var.vpc.public_subnets[2]
   vpc_security_group_ids      = [var.sg_pub_id]
 
   tags = {
@@ -60,6 +60,19 @@ resource "aws_instance" "ec2_private" {
   key_name                    = var.key_name
   subnet_id                   = var.vpc.private_subnets[1]
   vpc_security_group_ids      = [var.sg_priv_id]
+  tags = {
+    "Name" = "${var.namespace}-app"
+  } 
+} 
+
+// Configure web_server EC2 instance
+resource "aws_instance" "web_server" {
+  ami                         = data.aws_ami.amazon-linux-2.id
+  associate_public_ip_address = true
+  instance_type               = var.instance_type
+  key_name                    = var.key_name
+  subnet_id                   = var.vpc.private_subnets[0]
+  vpc_security_group_ids      = [var.web_sg_id]
   user_data = <<-EOF
     #!/bin/bash
     sudo yum update -y
@@ -69,7 +82,21 @@ resource "aws_instance" "ec2_private" {
     echo "<html><body><div>Hello, world!</div></body></html>" > /var/www/html/index.html
     EOF
   tags = {
-    "Name" = "${var.namespace}-node"
+    "Name" = "${var.namespace}-web_server"
+  }  
+
+}
+
+// Configure database subnet
+resource "aws_instance" "db_server" {
+  ami                         = data.aws_ami.amazon-linux-2.id
+  associate_public_ip_address = false
+  instance_type               = var.instance_type
+  key_name                    = var.key_name
+  subnet_id                   = var.vpc.database_subnets[0]
+  vpc_security_group_ids      = [var.sg_db_access_id]
+  tags = {
+    "Name" = "${var.namespace}-db_server"
   }  
 
 }
