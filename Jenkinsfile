@@ -7,8 +7,10 @@ pipeline{
 	string(name: "AWS_ACCESS_KEY",
 	       defaultValue: "",
 	       description: "Aws_Access_key_id"
+    )
+    
 
-    ) , string(name: "AWS_SECRET_ACCESS_KEY",
+    string(name: "AWS_SECRET_ACCESS_KEY",
 	       defaultValue: "",
 	       description: "Aws_secret_key_id"  
     )       
