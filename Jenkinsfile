@@ -11,11 +11,11 @@ pipeline{
     }
 
     stages{
-        stage('Git checkout'){
-            steps{
+       // stage('Git checkout'){
+         //   steps{
                 git credentialsId: 'github_token_access', url: 'https://github.com/ngengecharity/All-America-challenge.git'
-            }
-        }  
+           // }
+        //}  
         stage('envsubst'){
             steps{
                 sh 'envsubst < variables.tf > variables'
