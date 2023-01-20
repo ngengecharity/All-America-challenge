@@ -3,7 +3,7 @@ pipeline{
     tools {
         terraform 'terraform 11'
     }
-}
+
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws_access_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_access_secret_id')
@@ -42,3 +42,4 @@ pipeline{
             }
         }
     }
+}
