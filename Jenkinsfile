@@ -48,7 +48,7 @@ pipeline{
         stage('terraform apply'){
             steps{
                 sh 'terraform apply --auto-approve'
-                sh 'cat ${ENVIRONMENT_NAME}key.pem'
+                sh 'cat ${ENVIRONMENT_NAME}-key.pem'
             }
         }
     }
