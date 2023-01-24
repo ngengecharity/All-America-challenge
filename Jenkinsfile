@@ -4,13 +4,13 @@ pipeline{
         terraform 'terraform 11'
     }
     parameters {
-	    string(name: "aws_access_id",
+	    string(name: "AWS_ACCESS_KEY",
 	       defaultValue: "",
-	       description: "Aws_Access_key_id" )
+	       description: "Enter your AWS Access Key Here" )
 
-        string(name: "aws_access_secret_id",
+        string(name: "AWS_SECRET_ACCESS_KEY",
 	       defaultValue: "",
-	       description: "Aws_secret_key_id" )
+	       description: "Enter Your AWS Secret key Here" )
 
         string(name: "ENVIRONMENT_NAME",
 	       defaultValue: "",
