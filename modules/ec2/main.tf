@@ -87,6 +87,20 @@ resource "aws_instance" "web_server" {
 
 }
 
+// Configure the web_server2 in a public subnet
+resource "aws_instance" "web_server2" {
+  ami                         = data.aws_ami.amazon-linux-2.id
+  associate_public_ip_address = true
+  instance_type               = var.instance_type
+  key_name                    = var.key_name
+  subnet_id                   = var.vpc.public_subnets[2]
+  vpc_security_group_ids      = [var.web2_sg_pub_id]
+
+  tags = {
+    "Name" = "${var.namespace}-web_server2"
+  }
+}
+
 // Configure database subnet
 resource "aws_instance" "db_server" {
   ami                         = data.aws_ami.amazon-linux-2.id

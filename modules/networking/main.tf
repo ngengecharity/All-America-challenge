@@ -65,6 +65,15 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  
+  ingress {
+    description = "database connection from wordpress to db instance"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["192.168.0.0/24"]
+  }
+
   ingress {
     description = "ssh from jumpbox"
     from_port   = 22
