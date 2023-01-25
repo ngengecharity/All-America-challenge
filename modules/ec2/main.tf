@@ -95,7 +95,7 @@ resource "aws_instance" "web_server2" {
   instance_type               = var.instance_type
   key_name                    = var.key_name
   subnet_id                   = var.vpc.public_subnets[2]
-  vpc_security_group_ids      = [var.web2_sg_pub_id]
+  vpc_security_group_ids      = [var.web_sg_pub_id]
   user_data                   = file("docker-compose.yml")
 
   tags = {

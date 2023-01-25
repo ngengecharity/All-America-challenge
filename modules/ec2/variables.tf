@@ -26,10 +26,6 @@ variable "web_sg_id" {
   type = any
 }
 
-variable "web2_sg_id" {
-  type = any
-}
-
 variable "instance_type" {
   description = "AWS Instance Types"
   default     = "t2.micro"
