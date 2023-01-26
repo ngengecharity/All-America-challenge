@@ -31,6 +31,14 @@ resource "aws_security_group" "allow_ssh_pub" {
     cidr_blocks = ["73.215.142.52/32"]
   }
 
+   ingress {
+    description = "SSH from the internet/outside"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${JENKINS_IP}"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
