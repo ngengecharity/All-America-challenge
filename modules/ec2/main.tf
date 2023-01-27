@@ -1,5 +1,3 @@
-
-
 // Create aws_ami filter to pick up the ami available in your region
 data "aws_ami" "amazon-linux-2" {
   most_recent = true
@@ -88,7 +86,7 @@ resource "aws_instance" "web_server" {
 
 }
 
-// Configure the web_server2 in a public subnet
+// Configure web_server2 in a public subnet
 resource "aws_instance" "web_server2" {
   ami                         = data.aws_ami.amazon-linux-2.id
   associate_public_ip_address = true
@@ -96,7 +94,7 @@ resource "aws_instance" "web_server2" {
   key_name                    = var.key_name
   subnet_id                   = var.vpc.public_subnets[2]
   vpc_security_group_ids      = [var.web_sg_pub_id]
-  user_data                   = file("docker-compose.yml")
+  //user_data                   = file("docker-compose.yml")
 
   tags = {
     "Name" = "${var.namespace}-web_server2"
