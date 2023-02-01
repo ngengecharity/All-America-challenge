@@ -77,19 +77,7 @@ resource "aws_instance" "web_server" {
     "Name" = "${var.namespace}-web_server"
   }
 }
-  //user_data = <<-EOF
-    #!/bin/bash
-   // sudo yum update -y
-    //sudo yum install httpd -y
-    //sudo systemctl enable httpd
-    //sudo systemctl start httpd
-    //echo "<html><body><div>Hello, world!</div></body></html>" > /var/www/html/index.html
-    //EOF
-  //tags = {
-    //"Name" = "${var.namespace}-web_server"
- // }  
-
-
+  
 
 // Configure web_server2 in a public subnet
 resource "aws_instance" "web_server2" {
