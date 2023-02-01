@@ -71,7 +71,7 @@ resource "aws_instance" "web_server" {
   key_name                    = var.key_name
   subnet_id                   = var.vpc.private_subnets[0]
   vpc_security_group_ids      = [var.web_sg_id]
-  user_data                   = file("wordpress.sh")
+  user_data                   = file("wordpress-frontend.sh")
 
     tags = {
     "Name" = "${var.namespace}-web_server"
@@ -114,7 +114,7 @@ resource "aws_instance" "db_server" {
   key_name                    = var.key_name
   subnet_id                   = var.vpc.database_subnets[0]
   vpc_security_group_ids      = [var.sg_db_access_id]
- // user_data                   = file("wordpress.sh")
+  user_data                   = file("mysql_bootstrap.sh")
   tags = {
     "Name" = "${var.namespace}-db_server"
   }  
