@@ -17,8 +17,8 @@ echo "myslq temp password is $tempRootDBPass"
 sudo systemctl stop mysqld.service
 sudo rm -rf /var/lib/mysql/*logfile*
 sudo systemctl start mysqld.service
-sudo mysqladmin -u root --password="$tempRootDBPass" password "$MYSQLROOTPASS"
-sudo mysql -u root --password="$MYSQLROOTPASS" -e <<-EOSQL
+mysqladmin -u root --password="$tempRootDBPass" password "$MYSQLROOTPASS"
+mysql -u root --password="$MYSQLROOTPASS" -e <<-EOSQL
     DELETE FROM mysql.user WHERE User='';
     DROP DATABASE IF EXISTS test;
     DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
