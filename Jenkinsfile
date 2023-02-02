@@ -73,6 +73,12 @@ pipeline{
                 sh 'cat ${ENVIRONMENT_NAME}-key.pem'
             }
         }
+
+        stage('CleanWorkSpace'){
+            steps {
+                cleanWs()
+            }
+        }
         //stage('Get database IP') {
 			//steps{
                 //DBHOST = $(sh  "aws ec2 describe-instances --filters Name=tag:Name,Values='${ENVIRONMENT_NAME}-db_server' --query 'Reservations[].Instances[].PrivateIpAddress' --output text")
