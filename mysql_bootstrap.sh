@@ -28,7 +28,7 @@ EOSQL
 sudo systemctl status mysqld.service
 
 ## Creating database, user and password
-mysql -uroot -p$MYSQLROOTPASS <<QUERY_INPUT
+mysql -u root -p $MYSQLROOTPASS <<QUERY_INPUT
 CREATE USER '$DBUSER'@'%' IDENTIFIED BY '$DBPASS';
 CREATE DATABASE $DBNAME;
 GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'%';
