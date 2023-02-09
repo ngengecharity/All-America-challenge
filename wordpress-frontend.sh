@@ -2,9 +2,6 @@
 #Bash script to install and configure wordpress
 #######################################
 # Section 1
-DBPASS=$DBPASS
-DBNAME=$DBNAME
-DBUSER=$DBUSER
 #Installation requirements
 #update system
 echo "updating OS"
