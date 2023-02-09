@@ -1,10 +1,6 @@
 #!/bin/bash
 # Install MySQL
 # # Installation of mysql
-MYSQLROOTPASS=$MYSQLROOTPASS
-DBPASS=$DBPASS
-DBNAME=$DBNAME
-DBUSER=$DBUSER
 echo "Installing mysql repo packages"
 sudo yum install -y https://repo.mysql.com//mysql80-community-release-el7-5.noarch.rpm
 wait
