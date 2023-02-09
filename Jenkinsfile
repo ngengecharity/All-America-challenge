@@ -60,7 +60,7 @@ pipeline{
                 sh 'envsubst < mysql_bootstrap.sh > mysql'
                 sh 'rm -rf mysql_bootstrap.sh '
                 sh 'mv mysql mysql_bootstrap.sh '
-                sh 'sudo perl -pi -e "s/--password=""/--password="$tempRootDBPass"/g" mysql_bootstrap.sh'
+                sh 'perl -pi -e "s/--password=""/--password="$tempRootDBPass"/g" mysql_bootstrap.sh'
             }
         }      
         stage('terraform init'){
