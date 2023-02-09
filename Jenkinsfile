@@ -53,7 +53,7 @@ pipeline{
                 sh 'envsubst < modules/networking/main.tf > modules/networking/main'
                 sh 'rm -rf modules/networking/main.tf '
                 sh 'mv modules/networking/main modules/networking/main.tf'
-                sh 'envsubst < wordpress-frontend.sh > fe'
+                sh "envsubst '\$DBUSER\$DBNAME\$DBPASS'< wordpress-frontend.sh > fe"
                 sh 'rm -rf wordpress-frontend.sh '
                 sh 'mv fe wordpress-frontend.sh '
                 sh "envsubst '\$DBUSER\$DBNAME\$DBPASS\$MYSQLROOTPASS' <mysql_bootstrap.sh  > mysql"
@@ -72,6 +72,17 @@ pipeline{
                 sh 'cat ${ENVIRONMENT_NAME}-key.pem'
             }
         }
+        stage('Setup Frontend') {
+			steps{
+                DBHOST = sh ("aws ec2 describe-instances --filters Name=tag:Name,Values='${ENVIRONMENT_NAME}-db_server' --query 'Reservations[].Instances[].PrivateIpAddress' --output text")
+                sh "echo ${DBHOST}"
+                sh 'envsubst < wordpress-frontend.sh > fe'
+                sh 'rm -rf wordpress-frontend.sh '
+                sh 'mv fe wordpress-frontend.sh '
+                sh 'terraform init'
+                sh 'terraform apply --auto-approve'   
+			}
+        }    
 
        // stage('CleanWorkSpace'){
        //     steps {
