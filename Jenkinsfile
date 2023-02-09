@@ -74,7 +74,7 @@ pipeline{
         }
         stage('Setup Frontend') {
 			steps{
-                DBHOST = sh ("aws ec2 describe-instances --filters Name=tag:Name,Values='${ENVIRONMENT_NAME}-db_server' --query 'Reservations[].Instances[].PrivateIpAddress' --output text")
+                DBHOST = sh (aws ec2 describe-instances --filters Name=tag:Name,Values='${ENVIRONMENT_NAME}'-db_server --query 'Reservations[].Instances[].PrivateIpAddress' --output text)
                 sh "echo ${DBHOST}"
                 sh 'envsubst < wordpress-frontend.sh > fe'
                 sh 'rm -rf wordpress-frontend.sh '
