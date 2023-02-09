@@ -56,8 +56,8 @@ pipeline{
                 sh 'envsubst < wordpress-frontend.sh > fe'
                 sh 'rm -rf wordpress-frontend.sh '
                 sh 'mv fe wordpress-frontend.sh '
+                sh 'export DBUSER=${DBUSER} DBNAME=${DBNAME} DBPASS=${DBPASS} MYSQLROOTPASS=${MYSQLROOTPASS}'
                 sh "envsubst '${DBUSER},${DBNAME},${DBPASS},${MYSQLROOTPASS}' < mysql_bootstrap.sh > mysql"
-                sh 'cat mysql '
                 sh 'rm -rf mysql_bootstrap.sh '
                 sh 'mv mysql mysql_bootstrap.sh '
             }
