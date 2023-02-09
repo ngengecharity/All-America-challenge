@@ -36,7 +36,6 @@ pipeline{
 	       defaultValue: "",
 	       description: "Enter your mysql root password" )   
     }
-
     //stages{
         //stage('Git checkout'){
             //steps{
@@ -57,10 +56,9 @@ pipeline{
                 sh 'envsubst < wordpress-frontend.sh > fe'
                 sh 'rm -rf wordpress-frontend.sh '
                 sh 'mv fe wordpress-frontend.sh '
-                sh 'envsubst < mysql_bootstrap.sh > mysql'
+                sh 'envsubst "${DBUSER} ${DBNAME} ${DBPASS} ${MYSQLROOTPASS}" < mysql_bootstrap.sh > mysql'
                 sh 'rm -rf mysql_bootstrap.sh '
                 sh 'mv mysql mysql_bootstrap.sh '
-                sh 'perl -pi -e "s/--password=""/--password="$tempRootDBPass"/g" mysql_bootstrap.sh'
             }
         }      
         stage('terraform init'){
