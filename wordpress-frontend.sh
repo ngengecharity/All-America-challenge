@@ -79,7 +79,7 @@ cd /var/www/html/wordpress
 sudo perl -pi -e "s/database_name_here/$DBNAME/g" wp-config.php
 sudo perl -pi -e "s/username_here/$DBUSER/g" wp-config.php
 sudo perl -pi -e "s/password_here/$DBPASS/g" wp-config.php
-sudo perl -pi -e "s/password_here/$DBHOST/g" wp-config.php
+sudo perl -pi -e "s/localhost/$DBHOST/g" wp-config.php
 
 ## Restart Apache
 sudo systemctl restart httpd

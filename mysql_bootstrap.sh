@@ -24,14 +24,16 @@ mysql -u root --password="$MYSQLROOTPASS" -e <<-EOSQL
     DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
     DELETE FROM mysql.user where user != 'mysql.sys';
     FLUSH PRIVILEGES;
+    EXIT
 EOSQL
-sudo systemctl status mysqld.service
+
+wait
 
 ## Creating database, user and password
-mysql -u root -p $MYSQLROOTPASS <<QUERY_INPUT
-CREATE USER '$DBUSER'@'%' IDENTIFIED BY '$DBPASS';
-CREATE DATABASE $DBNAME;
-GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'%';
-FLUSH PRIVILEGES;
-EXIT
+mysql -u root -p$MYSQLROOTPASS <<QUERY_INPUT
+    CREATE USER '$DBUSER'@'%' IDENTIFIED BY '$DBPASS';
+    CREATE DATABASE $DBNAME;
+    GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'%';
+    FLUSH PRIVILEGES;
+    EXIT
 QUERY_INPUT

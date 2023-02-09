@@ -51,7 +51,7 @@ resource "aws_security_group" "allow_ssh_pub" {
   }
 }
 
-// SG to allow SSH connections to webserices from outside. for security purposes replace 0.0.0.0/0 to a secured IP
+// SG to allow SSH connections to web serices from outside. for security purposes replace 0.0.0.0/0 to a secured IP
 resource "aws_security_group" "web_sg" {
   name        = "${var.namespace}-web_sg"
   description = "Allow web inbound traffic from the internet"
