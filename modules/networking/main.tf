@@ -31,14 +31,6 @@ resource "aws_security_group" "allow_ssh_pub" {
     cidr_blocks = ["73.215.142.52/32"]
   }
 
-   ingress {
-    description = "SSH from the internet/outside"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${JENKINS_IP}"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -51,18 +43,26 @@ resource "aws_security_group" "allow_ssh_pub" {
   }
 }
 
-// SG to allow SSH connections to webserices from outside. for security purposes replace 0.0.0.0/0 to a secured IP
+// Allow SSH and Web access from jumpbox and loadbalancer
 resource "aws_security_group" "web_sg" {
   name        = "${var.namespace}-web_sg"
-  description = "Allow web inbound traffic from the internet"
+  description = "Allow web inbound traffic from the load balancer"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description = "web traffic from the internet"
+    description = "web traffic from the loadbalancer"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.5.0/24"]
+  }
+
+  ingress {
+    description = "web traffic from the loadbalancer"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["192.168.0.0/24"]
   }
 
   ingress {
@@ -70,7 +70,7 @@ resource "aws_security_group" "web_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.5.0/24"]
+    cidr_blocks = ["192.168.4.0/24"]
   }
 
 
@@ -85,6 +85,34 @@ resource "aws_security_group" "web_sg" {
     Name = "${var.namespace}-web_sg"
   }
 }
+
+// Allow access from outside to access web service via loadbalancer. for security purposes replace 0.0.0.0/0 to a secured IP
+resource "aws_security_group" "alb_sg" {
+  name        = "${var.namespace}-alb"
+  description = "Allow web inbound traffic from the load balancer"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    description = "web traffic from the internet"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.namespace}-alb"
+  }
+}
+
+
 // SG to allow db connections to database from private subnet. for security purposes replace 0.0.0.0/0 to a secured IP
 resource "aws_security_group" "db_access" {
   name        = "${var.namespace}-db_access"
@@ -101,10 +129,10 @@ resource "aws_security_group" "db_access" {
 
   ingress {
     description = "allow ssh access from jumpbox"
-    from_port   = 22
-    to_port     = 22
+    from_port   = 3306
+    to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["192.168.5.0/24"]
+    cidr_blocks = ["192.168.4.0/24"]
   }
 
   egress {
@@ -130,7 +158,7 @@ resource "aws_security_group" "allow_ssh_priv" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.5.0/24"]
+    cidr_blocks = ["192.168.4.0/24"]
   }
   ingress {
     description = "connection from web_server"

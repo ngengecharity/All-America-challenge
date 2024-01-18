@@ -1,6 +1,5 @@
 variable "namespace" {
   description = "The project namespace to use for unique resource naming"
-  default     = "${ENVIRONMENT_NAME}"
   type        = string
 }
 
@@ -12,12 +11,25 @@ variable "region" {
 
 variable "access_key" {
   description = "AWS Access Key"
-  default     = "${AWS_ACCESS_KEY}"
   type        = string
 }
 
 variable "secret_key" {
   description = "AWS Secret Key"
-  default     = "${AWS_SECRET_ACCESS_KEY}"
+  type        = string
+}
+
+variable "db_name" {
+  description = "Enter your dbname"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Enter your dbpassword"
+  type        = string
+}
+
+variable "db_username" {
+  description = "database username"
   type        = string
 }
